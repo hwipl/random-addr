@@ -6,18 +6,28 @@ import (
 	"log"
 )
 
+// MAC is a MAC address
+type MAC struct {
+	b [6]byte
+}
+
+// String returns MAC as a string
+func (m *MAC) String() string {
+	return fmt.Sprintf("%02x:%02x:%02x:%02x:%02x:%02x",
+		m.b[0], m.b[1], m.b[2], m.b[3], m.b[4], m.b[5])
+}
+
 // Random returns a random MAC address
-func Random() string {
-	b := make([]byte, 6)
-	_, err := rand.Read(b)
+func Random() *MAC {
+	m := &MAC{}
+	_, err := rand.Read(m.b[:])
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// set local and unicast bits
-	b[0] |= 0b00000010
-	b[0] &= 0b11111110
+	m.b[0] |= 0b00000010
+	m.b[0] &= 0b11111110
 
-	return fmt.Sprintf("%02x:%02x:%02x:%02x:%02x:%02x",
-		b[0], b[1], b[2], b[3], b[4], b[5])
+	return m
 }
