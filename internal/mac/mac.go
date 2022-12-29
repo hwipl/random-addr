@@ -17,6 +17,12 @@ func (m *MAC) Hex() string {
 		m.b[0], m.b[1], m.b[2], m.b[3], m.b[4], m.b[5])
 }
 
+// Binary returns MAC as a binary string
+func (m *MAC) Binary() string {
+	return fmt.Sprintf("%08b:%08b:%08b:%08b:%08b:%08b",
+		m.b[0], m.b[1], m.b[2], m.b[3], m.b[4], m.b[5])
+}
+
 // String returns MAC as a string
 func (m *MAC) String() string {
 	return m.Hex()
