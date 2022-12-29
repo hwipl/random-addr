@@ -11,10 +11,15 @@ type MAC struct {
 	b [6]byte
 }
 
-// String returns MAC as a string
-func (m *MAC) String() string {
+// Hex returns MAC as hex string
+func (m *MAC) Hex() string {
 	return fmt.Sprintf("%02x:%02x:%02x:%02x:%02x:%02x",
 		m.b[0], m.b[1], m.b[2], m.b[3], m.b[4], m.b[5])
+}
+
+// String returns MAC as a string
+func (m *MAC) String() string {
+	return m.Hex()
 }
 
 // Random returns a random MAC address
