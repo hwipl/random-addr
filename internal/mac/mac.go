@@ -40,6 +40,14 @@ func (m *MAC) Local() bool {
 	return !m.Universal()
 }
 
+// UL returns the U/L bit as string
+func (m *MAC) UL() string {
+	if m.Local() {
+		return "Local"
+	}
+	return "Universal"
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
