@@ -28,6 +28,12 @@ func (m *MAC) String() string {
 	return m.Hex()
 }
 
+// Universal returns true if MAC is globally unique,
+// i.e. Universal/Local (U/L) bit is 0
+func (m *MAC) Universal() bool {
+	return m.b[0]&0b00000010 == 0
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
