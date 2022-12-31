@@ -34,6 +34,12 @@ func (m *MAC) Universal() bool {
 	return m.b[0]&0b00000010 == 0
 }
 
+// Local returns true if MAC is locally administered,
+// i.e. Universal/Local (U/L) bit is 1
+func (m *MAC) Local() bool {
+	return !m.Universal()
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
