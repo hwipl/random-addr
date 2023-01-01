@@ -48,6 +48,11 @@ func (m *MAC) UL() string {
 	return "Universal"
 }
 
+// Individual returns true if MAC's Individual/Group (I/G) bit is 0
+func (m *MAC) Individual() bool {
+	return m.b[0]&0b00000001 == 0
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
