@@ -53,6 +53,11 @@ func (m *MAC) Individual() bool {
 	return m.b[0]&0b00000001 == 0
 }
 
+// Group returns true if MAC's Individual/Group (I/G) bit is 1
+func (m *MAC) Group() bool {
+	return !m.Individual()
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
