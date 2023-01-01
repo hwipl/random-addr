@@ -58,6 +58,12 @@ func (m *MAC) Group() bool {
 	return !m.Individual()
 }
 
+// Unicast returns true if MAC is unicast,
+// i.e. Individual/Group (I/G) bit is 0
+func (m *MAC) Unicast() bool {
+	return m.Individual()
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
