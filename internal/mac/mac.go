@@ -70,6 +70,14 @@ func (m *MAC) Multicast() bool {
 	return m.Group()
 }
 
+// IG returns the I/G (Unicast/Multicast) bit as a string
+func (m *MAC) IG() string {
+	if m.Group() {
+		return "Group (Multicast)"
+	}
+	return "Individual (Unicast)"
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
