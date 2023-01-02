@@ -83,6 +83,11 @@ func (m *MAC) OUI() string {
 	return fmt.Sprintf("%02x:%02x:%02x", m.b[0], m.b[1], m.b[2])
 }
 
+// NIC returns the NIC specific part of MAC as string
+func (m *MAC) NIC() string {
+	return fmt.Sprintf("%02x:%02x:%02x", m.b[3], m.b[4], m.b[5])
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
