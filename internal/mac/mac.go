@@ -78,6 +78,11 @@ func (m *MAC) IG() string {
 	return "Individual (Unicast)"
 }
 
+// OUI returns the OUI part of MAC as string
+func (m *MAC) OUI() string {
+	return fmt.Sprintf("%02x:%02x:%02x", m.b[0], m.b[1], m.b[2])
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
