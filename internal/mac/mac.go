@@ -88,6 +88,23 @@ func (m *MAC) NIC() string {
 	return fmt.Sprintf("%02x:%02x:%02x", m.b[3], m.b[4], m.b[5])
 }
 
+// Explain returns an explanation of the MAC and its structure as string
+func (m *MAC) Explain() string {
+	return fmt.Sprintf(`           OUI: %s          NIC specific: %s
+      ___________/\___________   ___________/\___________
+     |                        | |                        |
+Hex:    %02x   :   %02x   :   %02x   :   %02x   :   %02x   :   %02x
+Bin: %s
+           ||
+           ||_ I/G: %s
+           |__ U/L: %s`,
+		m.OUI(), m.NIC(),
+		m.b[0], m.b[1], m.b[2], m.b[3], m.b[4], m.b[5],
+		m.Binary(),
+		m.IG(), m.UL(),
+	)
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
