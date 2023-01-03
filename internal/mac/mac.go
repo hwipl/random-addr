@@ -105,6 +105,20 @@ Bin: %s
 	)
 }
 
+// ExplainHex returns an explanation of the hex representation of the MAC
+// and its structure as string
+func (m *MAC) ExplainHex() string {
+	return fmt.Sprintf(`    OUI     NIC specific
+ ___/\___   ___/\___
+|        | |        |
+ %s : %s
+        |
+        |_ I/G: %s
+        |_ U/L: %s`,
+		m.OUI(), m.NIC(), m.IG(), m.UL(),
+	)
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
