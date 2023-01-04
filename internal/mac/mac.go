@@ -152,6 +152,26 @@ I/G:          %s`,
 	)
 }
 
+// Table returns all information about the MAC as a table in a string
+func (m *MAC) Table() string {
+	return fmt.Sprintf(
+		` ----------------------------------------------------------------------
+| Hex          | %-53s |
+| OUI          | %-53s |
+| NIC specific | %-53s |
+| Binary       | %-53s |
+| U/L          | %-53s |
+| I/G          | %-53s |
+ ----------------------------------------------------------------------`,
+		m.Hex(),
+		m.OUI(),
+		m.NIC(),
+		m.Binary(),
+		m.UL(),
+		m.IG(),
+	)
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
