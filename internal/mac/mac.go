@@ -135,6 +135,23 @@ func (m *MAC) ExplainBin() string {
 	)
 }
 
+// All returns all information about the MAC as string
+func (m *MAC) All() string {
+	return fmt.Sprintf(`Hex:          %s
+OUI:          %s
+NIC specific: %s
+Binary:       %s
+U/L:          %s
+I/G:          %s`,
+		m.Hex(),
+		m.OUI(),
+		m.NIC(),
+		m.Binary(),
+		m.UL(),
+		m.IG(),
+	)
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
