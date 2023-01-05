@@ -172,6 +172,11 @@ func (m *MAC) Table() string {
 	)
 }
 
+// SetUniversal sets the U/L bit of the MAC address to 0 (universal)
+func (m *MAC) SetUniversal() {
+	m.b[0] &= 0b11111101
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
