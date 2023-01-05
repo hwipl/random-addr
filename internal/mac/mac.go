@@ -182,6 +182,15 @@ func (m *MAC) SetLocal() {
 	m.b[0] |= 0b00000010
 }
 
+// SetUL sets if the address is universal via the U/L bit
+func (m *MAC) SetUL(universal bool) {
+	if universal {
+		m.SetUniversal()
+		return
+	}
+	m.SetLocal()
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
