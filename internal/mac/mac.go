@@ -191,6 +191,11 @@ func (m *MAC) SetUL(universal bool) {
 	m.SetLocal()
 }
 
+// SetIndividual sets the I/G bit of the MAC address to 0 (individual)
+func (m *MAC) SetIndividual() {
+	m.b[0] &= 0b11111110
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
