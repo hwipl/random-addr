@@ -211,6 +211,15 @@ func (m *MAC) SetMulticast() {
 	m.SetGroup()
 }
 
+// SetIG sets if the address is individual via the I/G bit
+func (m *MAC) SetIG(individual bool) {
+	if individual {
+		m.SetIndividual()
+		return
+	}
+	m.SetGroup()
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
