@@ -206,6 +206,11 @@ func (m *MAC) SetUnicast() {
 	m.SetIndividual()
 }
 
+// SetMulticast sets I/G bit of the MAC address to multicast (group)
+func (m *MAC) SetMulticast() {
+	m.SetGroup()
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
