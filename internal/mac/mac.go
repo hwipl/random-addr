@@ -196,6 +196,11 @@ func (m *MAC) SetIndividual() {
 	m.b[0] &= 0b11111110
 }
 
+// SetGroup sets the I/G bit of the MAC address to 1 (group)
+func (m *MAC) SetGroup() {
+	m.b[0] |= 0b00000001
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
