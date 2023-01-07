@@ -242,9 +242,6 @@ func Random() *MAC {
 		log.Fatal(err)
 	}
 
-	// set local and unicast bits
-	m.b[0] |= 0b00000010
-	m.b[0] &= 0b11111110
 
 	return m
 }
