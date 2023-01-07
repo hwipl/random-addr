@@ -227,6 +227,13 @@ func (m *MAC) SetOUI(oui [3]byte) {
 	}
 }
 
+// SetNIC sets the NIC specific part of the MAC
+func (m *MAC) SetNIC(nic [3]byte) {
+	for i := 0; i < 3; i++ {
+		m.b[3+i] = nic[i]
+	}
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
