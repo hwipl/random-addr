@@ -220,6 +220,13 @@ func (m *MAC) SetIG(individual bool) {
 	m.SetGroup()
 }
 
+// SetOUI sets the OUI part of the MAC
+func (m *MAC) SetOUI(oui [3]byte) {
+	for i := 0; i < 3; i++ {
+		m.b[i] = oui[i]
+	}
+}
+
 // Random returns a random MAC address
 func Random() *MAC {
 	m := &MAC{}
