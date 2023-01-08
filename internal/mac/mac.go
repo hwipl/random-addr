@@ -265,3 +265,8 @@ func RandomUG() *MAC {
 	m.SetGroup()
 	return m
 }
+
+// RandomUM returns a random universal multicast address
+func RandomUM() *MAC {
+	return RandomUG()
+}
