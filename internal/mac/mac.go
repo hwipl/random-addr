@@ -242,6 +242,13 @@ func Random() *MAC {
 		log.Fatal(err)
 	}
 
+	return m
+}
 
+// RandomUI returns a random universal individual address
+func RandomUI() *MAC {
+	m := Random()
+	m.SetUniversal()
+	m.SetIndividual()
 	return m
 }
