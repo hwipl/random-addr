@@ -278,3 +278,8 @@ func RandomLI() *MAC {
 	m.SetIndividual()
 	return m
 }
+
+// RandomLU returns a random local unicast address
+func RandomLU() *MAC {
+	return RandomLI()
+}
