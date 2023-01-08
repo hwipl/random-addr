@@ -291,3 +291,8 @@ func RandomLG() *MAC {
 	m.SetGroup()
 	return m
 }
+
+// RandomLM returns a random local multicast address
+func RandomLM() *MAC {
+	return RandomLG()
+}
