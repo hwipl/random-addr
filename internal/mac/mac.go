@@ -270,3 +270,11 @@ func RandomUG() *MAC {
 func RandomUM() *MAC {
 	return RandomUG()
 }
+
+// RandomLI returns a random local individual address
+func RandomLI() *MAC {
+	m := Random()
+	m.SetLocal()
+	m.SetIndividual()
+	return m
+}
