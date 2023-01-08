@@ -252,3 +252,8 @@ func RandomUI() *MAC {
 	m.SetIndividual()
 	return m
 }
+
+// RandomUU returns a random universal unicast address
+func RandomUU() *MAC {
+	return RandomUI()
+}
