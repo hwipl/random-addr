@@ -283,3 +283,11 @@ func RandomLI() *MAC {
 func RandomLU() *MAC {
 	return RandomLI()
 }
+
+// RandomLG returns a random local group address
+func RandomLG() *MAC {
+	m := Random()
+	m.SetLocal()
+	m.SetGroup()
+	return m
+}
