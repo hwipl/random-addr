@@ -257,3 +257,11 @@ func RandomUI() *MAC {
 func RandomUU() *MAC {
 	return RandomUI()
 }
+
+// RandomUG returns a random universal group address
+func RandomUG() *MAC {
+	m := Random()
+	m.SetUniversal()
+	m.SetGroup()
+	return m
+}
