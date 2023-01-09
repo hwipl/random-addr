@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"flag"
 	"fmt"
 
 	"github.com/hwipl/random-addr/internal/mac"
@@ -22,8 +23,19 @@ func printMAC(m *mac.MAC) {
 	fmt.Println()
 }
 
-// Run is the main entry point
-func Run() {
+// runMAC runs the mac subcommand
+func runMAC() {
 	m := mac.Random()
 	printMAC(m)
+}
+
+// Run is the main entry point
+func Run() {
+	flag.Parse()
+	switch flag.Arg(0) {
+	case "mac":
+		runMAC()
+	default:
+		runMAC()
+	}
 }
