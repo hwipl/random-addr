@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/hwipl/random-addr/internal/ipv4"
+	"github.com/hwipl/random-addr/internal/ipv6"
 	"github.com/hwipl/random-addr/internal/mac"
 )
 
@@ -36,6 +37,12 @@ func runIPv4() {
 	fmt.Println(ip)
 }
 
+// runIPv6 runs the ipv6 subcommand
+func runIPv6() {
+	ip := ipv6.Random()
+	fmt.Println(ip)
+}
+
 // Run is the main entry point
 func Run() {
 	flag.Parse()
@@ -44,6 +51,8 @@ func Run() {
 		runMAC()
 	case "ipv4":
 		runIPv4()
+	case "ipv6":
+		runIPv6()
 	default:
 		runMAC()
 	}
