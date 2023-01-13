@@ -2,6 +2,7 @@ package ipv4
 
 import (
 	"crypto/rand"
+	"fmt"
 	"log"
 	"net/netip"
 )
@@ -19,6 +20,12 @@ func (ip *IPv4) Addr() netip.Addr {
 // Decimal returns ip as dotted decimal
 func (ip *IPv4) Decimal() string {
 	return ip.Addr().String()
+}
+
+// Binary returns ip as a binary string
+func (ip *IPv4) Binary() string {
+	return fmt.Sprintf("%08b.%08b.%08b.%08b",
+		ip.b[0], ip.b[1], ip.b[2], ip.b[3])
 }
 
 // String returns ip as String
