@@ -2,6 +2,7 @@ package ipv6
 
 import (
 	"crypto/rand"
+	"fmt"
 	"log"
 	"net/netip"
 )
@@ -14,6 +15,19 @@ type IPv6 struct {
 // Addr returns ip as Addr
 func (ip *IPv6) Addr() netip.Addr {
 	return netip.AddrFrom16(ip.b)
+}
+
+// Binary returns ip as a binary string
+func (ip *IPv6) Binary() string {
+	return fmt.Sprintf("%08b%08b:%08b%08b:"+
+		"%08b%08b:%08b%08b:"+
+		"%08b%08b:%08b%08b:"+
+		"%08b%08b:%08b%08b",
+		ip.b[0], ip.b[1], ip.b[2], ip.b[3],
+		ip.b[4], ip.b[5], ip.b[6], ip.b[7],
+		ip.b[8], ip.b[9], ip.b[10], ip.b[11],
+		ip.b[12], ip.b[13], ip.b[14], ip.b[15],
+	)
 }
 
 // String returns ip as String
