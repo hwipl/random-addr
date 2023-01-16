@@ -7,6 +7,11 @@ import (
 	"net/netip"
 )
 
+const (
+	// bitsPerByte is the number of bits per byte
+	bitsPerByte = 8
+)
+
 // IPv6 is an IPv6 address
 type IPv6 struct {
 	b [16]byte
@@ -56,10 +61,10 @@ func (ip *IPv6) SetPrefix(prefix string) {
 	// try to overwrite full bytes first, then single bits
 	// ignore last byte of b because it's p.Bits()
 	for i := 0; i < len(b)-1; i++ {
-		if bits < 8 {
+		if bits < bitsPerByte {
 			// last byte, not full, overwrite bits
 			ipBits := ip.b[i] & (0xff >> bits)
-			bBits := b[i] & (0xff << (8 - bits))
+			bBits := b[i] & (0xff << (bitsPerByte - bits))
 			ip.b[i] = ipBits | bBits
 
 			break
@@ -68,7 +73,7 @@ func (ip *IPv6) SetPrefix(prefix string) {
 		// full byte, overwrite byte
 		ip.b[i] = b[i]
 
-		bits -= 8
+		bits -= bitsPerByte
 	}
 }
 
