@@ -78,6 +78,11 @@ func (ip *IPv4) SetPrefix(prefix string) {
 	}
 }
 
+// SetPrefixLength sets prefix length of ip in number of bits
+func (ip *IPv4) SetPrefixLength(numBits int) {
+	ip.pl = numBits
+}
+
 // Random returns a random IPv4 address
 func Random() *IPv4 {
 	ip := &IPv4{}
