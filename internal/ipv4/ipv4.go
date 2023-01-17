@@ -15,6 +15,9 @@ const (
 // IPv4 is an IPv4 address
 type IPv4 struct {
 	b [4]byte
+
+	// pl is the prefix length
+	pl int
 }
 
 // Addr returns ip as Addr
