@@ -25,6 +25,11 @@ func (ip *IPv4) Addr() netip.Addr {
 	return netip.AddrFrom4(ip.b)
 }
 
+// Prefix returns ip as Prefix
+func (ip *IPv4) Prefix() netip.Prefix {
+	return netip.PrefixFrom(ip.Addr(), ip.pl)
+}
+
 // Decimal returns ip as dotted decimal
 func (ip *IPv4) Decimal() string {
 	return ip.Addr().String()
