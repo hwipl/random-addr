@@ -25,6 +25,11 @@ func (ip *IPv6) Addr() netip.Addr {
 	return netip.AddrFrom16(ip.b)
 }
 
+// Prefix returns ip as Prefix
+func (ip *IPv6) Prefix() netip.Prefix {
+	return netip.PrefixFrom(ip.Addr(), ip.pl)
+}
+
 // Binary returns ip as a binary string
 func (ip *IPv6) Binary() string {
 	return fmt.Sprintf("%08b%08b:%08b%08b:"+
