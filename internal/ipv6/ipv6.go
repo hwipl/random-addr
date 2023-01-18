@@ -80,6 +80,11 @@ func (ip *IPv6) SetPrefix(prefix string) {
 	}
 }
 
+// SetPrefixLength sets prefix length of ip in number of bits
+func (ip *IPv6) SetPrefixLength(numBits int) {
+	ip.pl = numBits
+}
+
 // Random returns a random IPv6 address
 func Random() *IPv6 {
 	ip := &IPv6{}
