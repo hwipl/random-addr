@@ -15,6 +15,9 @@ const (
 // IPv6 is an IPv6 address
 type IPv6 struct {
 	b [16]byte
+
+	// pl is the prefix length
+	pl int
 }
 
 // Addr returns ip as Addr
