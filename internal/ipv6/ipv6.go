@@ -83,6 +83,9 @@ func (ip *IPv6) SetPrefix(prefix string) {
 
 		bits -= bitsPerByte
 	}
+
+	// set new prefix length
+	ip.pl = p.Bits()
 }
 
 // SetPrefixLength sets prefix length of ip in number of bits
