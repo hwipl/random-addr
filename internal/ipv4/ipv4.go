@@ -41,6 +41,11 @@ func (ip *IPv4) Binary() string {
 		ip.b[0], ip.b[1], ip.b[2], ip.b[3])
 }
 
+// Network returns the network part of ip
+func (ip *IPv4) Network() string {
+	return ip.Prefix().Masked().Addr().String()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
