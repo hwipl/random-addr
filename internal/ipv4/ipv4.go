@@ -46,6 +46,27 @@ func (ip *IPv4) Network() string {
 	return ip.Prefix().Masked().Addr().String()
 }
 
+// Host returns the host part of ip
+func (ip *IPv4) Host() string {
+	// create temporary array with only host bits set
+	b := [4]byte{}
+	bits := ip.pl
+	for i := 0; i < len(b); i++ {
+		if bits >= bitsPerByte {
+			// full byte, skip to next byte
+			bits -= bitsPerByte
+			continue
+		}
+
+		// skip remaining network bits, set host bits
+		ipBits := ip.b[i] & (0xff >> bits)
+		b[i] |= ipBits
+		bits = 0
+	}
+
+	return netip.AddrFrom4(b).String()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
