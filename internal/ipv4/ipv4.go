@@ -72,6 +72,11 @@ func (ip *IPv4) Loopback() bool {
 	return ip.Addr().IsLoopback()
 }
 
+// Private returns wether ip is a private address
+func (ip *IPv4) Private() bool {
+	return ip.Addr().IsPrivate()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
