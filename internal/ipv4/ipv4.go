@@ -77,6 +77,11 @@ func (ip *IPv4) Private() bool {
 	return ip.Addr().IsPrivate()
 }
 
+// Unspecified returns wether ip is the unspecified address
+func (ip *IPv4) Unspecified() bool {
+	return ip.Addr().IsUnspecified()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
