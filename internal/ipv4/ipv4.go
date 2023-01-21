@@ -67,6 +67,11 @@ func (ip *IPv4) Host() string {
 	return netip.AddrFrom4(b).String()
 }
 
+// Loopback returns wether ip is a loopback address
+func (ip *IPv4) Loopback() bool {
+	return ip.Addr().IsLoopback()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
