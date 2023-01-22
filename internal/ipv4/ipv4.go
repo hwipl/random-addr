@@ -82,6 +82,11 @@ func (ip *IPv4) Unspecified() bool {
 	return ip.Addr().IsUnspecified()
 }
 
+// Multicast returns wether ip is a multicast address
+func (ip *IPv4) Multicast() bool {
+	return ip.Addr().IsMulticast()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
