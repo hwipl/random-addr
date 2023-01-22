@@ -87,6 +87,27 @@ func (ip *IPv4) Multicast() bool {
 	return ip.Addr().IsMulticast()
 }
 
+// Broadcast returns wether ip is a broadcast address
+func (ip *IPv4) Broadcast() bool {
+	// skip prefix bits
+	bits := ip.pl
+	for i := 0; i < len(ip.b); i++ {
+		if bits >= bitsPerByte {
+			// full byte, skip to next byte
+			bits -= bitsPerByte
+			continue
+		}
+
+		// skip remaining network bits, check if host bits are set to 1
+		ipBits := ip.b[i] & (0xff >> bits)
+		if ipBits != (0xff >> bits) {
+			return false
+		}
+		bits = 0
+	}
+	return true
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
