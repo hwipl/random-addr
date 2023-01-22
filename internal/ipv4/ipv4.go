@@ -108,6 +108,11 @@ func (ip *IPv4) Broadcast() bool {
 	return true
 }
 
+// Unicast returns wether ip is a unicast address
+func (ip *IPv4) Unicast() bool {
+	return !ip.Multicast() && !ip.Broadcast()
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
