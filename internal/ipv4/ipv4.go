@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/netip"
+	"strings"
 )
 
 const (
@@ -170,6 +171,34 @@ func Random() *IPv4 {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	return ip
+}
+
+// Parse parses and returns the IPv4 address in s
+func Parse(s string) *IPv4 {
+	ip := &IPv4{}
+
+	// parse ip with prefix
+	if strings.Contains(s, "/") {
+		p, err := netip.ParsePrefix(s)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		ip.b = p.Addr().As4()
+		ip.pl = p.Bits()
+
+		return ip
+	}
+
+	// parse ip without prefix
+	a, err := netip.ParseAddr(s)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	ip.b = a.As4()
 
 	return ip
 }
