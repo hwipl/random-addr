@@ -114,6 +114,28 @@ func (ip *IPv4) Unicast() bool {
 	return !ip.Multicast() && !ip.Broadcast()
 }
 
+// Type returns the type of ip
+func (ip *IPv4) Type() string {
+	if ip.Loopback() {
+		return "loopback"
+	}
+	if ip.Unspecified() {
+		return "unspecified"
+	}
+	pp := "public"
+	if ip.Private() {
+		pp = "private"
+	}
+	ubm := "unicast"
+	if ip.Broadcast() {
+		ubm = "broadcast"
+	}
+	if ip.Multicast() {
+		ubm = "multicast"
+	}
+	return fmt.Sprintf("%s %s", pp, ubm)
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
