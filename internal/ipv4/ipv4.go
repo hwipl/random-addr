@@ -156,7 +156,6 @@ func (ip *IPv4) SetPrefix(prefix string) {
 
 	// overwrite bits
 	// try to overwrite full bytes first, then single bits
-	// ignore last byte of b because it's p.Bits()
 	for i := 0; i < len(b); i++ {
 		if bits < bitsPerByte {
 			// last byte, not full, overwrite bits
