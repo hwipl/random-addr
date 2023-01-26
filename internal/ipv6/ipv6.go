@@ -56,19 +56,15 @@ func (ip *IPv6) SetPrefix(prefix string) {
 		log.Fatal(err)
 	}
 
-	// get prefix bytes
-	b, err := p.MarshalBinary()
-	if err != nil {
-		log.Fatal(err)
-	}
-
+	// get prefix bytes,
 	// get number of bits to be overwritten
+	b := p.Addr().As16()
 	bits := p.Bits()
 
 	// overwrite bits
 	// try to overwrite full bytes first, then single bits
 	// ignore last byte of b because it's p.Bits()
-	for i := 0; i < len(b)-1; i++ {
+	for i := 0; i < len(b); i++ {
 		if bits < bitsPerByte {
 			// last byte, not full, overwrite bits
 			ipBits := ip.b[i] & (0xff >> bits)
