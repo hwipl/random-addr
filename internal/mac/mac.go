@@ -4,6 +4,7 @@ import (
 	"crypto/rand"
 	"fmt"
 	"log"
+	"net"
 )
 
 // MAC is a MAC address
@@ -295,4 +296,23 @@ func RandomLG() *MAC {
 // RandomLM returns a random local multicast address
 func RandomLM() *MAC {
 	return RandomLG()
+}
+
+// Parse parses and returns the MAC address in s
+func Parse(s string) *MAC {
+	mac := &MAC{}
+
+	hw, err := net.ParseMAC(s)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if len(hw) != 6 {
+		log.Fatal("invalid MAC address")
+	}
+
+	for i := 0; i < 6; i++ {
+		mac.b[i] = hw[i]
+	}
+
+	return mac
 }
