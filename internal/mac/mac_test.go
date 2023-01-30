@@ -4,6 +4,62 @@ import (
 	"testing"
 )
 
+// TestSetUL tests SetUL of MAC
+func TestSetUL(t *testing.T) {
+	m := &MAC{}
+
+	// test local
+	m.SetUL(false)
+	if !m.Local() {
+		t.Errorf("MAC is not local")
+	}
+
+	// test universal
+	m.SetUL(true)
+	if !m.Universal() {
+		t.Errorf("MAC is not universal")
+	}
+}
+
+// TestSetIG tests SetIG of MAC
+func TestSetIG(t *testing.T) {
+	m := &MAC{}
+
+	// test group
+	m.SetIG(false)
+	if !m.Group() {
+		t.Errorf("MAC is not group")
+	}
+
+	// test individual
+	m.SetIG(true)
+	if !m.Individual() {
+		t.Errorf("MAC is not individual")
+	}
+}
+
+// TestSetOUI tests SetOUI of MAC
+func TestSetOUI(t *testing.T) {
+	m := &MAC{}
+	m.SetOUI([3]byte{1, 2, 3})
+	want := "01:02:03"
+	got := m.OUI()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
+// TestSetNIC tests SetNIC of MAC
+func TestSetNIC(t *testing.T) {
+	m := &MAC{}
+	m.SetNIC([3]byte{1, 2, 3})
+	want := "01:02:03"
+	got := m.NIC()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // Random tests random MAC address creation
 func TestRandom(t *testing.T) {
 	mac := Random()
