@@ -4,6 +4,26 @@ import (
 	"testing"
 )
 
+// TestHex tests Hex of MAC
+func TestHex(t *testing.T) {
+	m := &MAC{}
+	want := "00:00:00:00:00:00"
+	got := m.Hex()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
+// TestBinary tests Binary of MAC
+func TestBinary(t *testing.T) {
+	m := &MAC{}
+	want := "00000000:00000000:00000000:00000000:00000000:00000000"
+	got := m.Binary()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestSetUL tests SetUL of MAC
 func TestSetUL(t *testing.T) {
 	m := &MAC{}
