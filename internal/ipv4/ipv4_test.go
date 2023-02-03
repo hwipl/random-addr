@@ -2,6 +2,65 @@ package ipv4
 
 import "testing"
 
+// TestType tests Type of IPv4
+func TestType(t *testing.T) {
+	// test loopback
+	loop := Parse("127.0.0.1")
+	want := "loopback"
+	got := loop.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test unspecified
+	unspec := Parse("0.0.0.0")
+	want = "unspecified"
+	got = unspec.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test public unicast
+	pubUC := Parse("1.2.3.4")
+	want = "public unicast"
+	got = pubUC.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test public broadcast
+	pubBC := Parse("1.2.3.255/24")
+	want = "public broadcast"
+	got = pubBC.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test public multicast
+	pubMC := Parse("224.0.0.1/24")
+	want = "public multicast"
+	got = pubMC.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test private unicast
+	privUC := Parse("10.2.3.4")
+	want = "private unicast"
+	got = privUC.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test private broadcast
+	privBC := Parse("10.2.3.255/24")
+	want = "private broadcast"
+	got = privBC.Type()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestSetPrefix tests SetPrefix of IPv4
 func TestSetPrefix(t *testing.T) {
 	ip := Random()
