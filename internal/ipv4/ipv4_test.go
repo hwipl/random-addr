@@ -2,6 +2,32 @@ package ipv4
 
 import "testing"
 
+// TestNetwork tests Network of IPv4
+func TestNetwork(t *testing.T) {
+	ip := &IPv4{
+		b: [4]byte{1, 1, 2, 2},
+	}
+	ip.SetPrefixLength(16)
+	want := "1.1.0.0"
+	got := ip.Network()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
+// TestHost tests Host of IPv4
+func TestHost(t *testing.T) {
+	ip := &IPv4{
+		b: [4]byte{1, 1, 2, 2},
+	}
+	ip.SetPrefixLength(16)
+	want := "0.0.2.2"
+	got := ip.Host()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestType tests Type of IPv4
 func TestType(t *testing.T) {
 	// test loopback
