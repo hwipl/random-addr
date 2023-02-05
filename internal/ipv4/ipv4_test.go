@@ -2,6 +2,26 @@ package ipv4
 
 import "testing"
 
+// TestDecimal tests Decimal of IPv4
+func TestDecimal(t *testing.T) {
+	ip := &IPv4{}
+	want := "0.0.0.0"
+	got := ip.Decimal()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
+// TestBinary tests Binary of IPv4
+func TestBinary(t *testing.T) {
+	ip := &IPv4{}
+	want := "00000000.00000000.00000000.00000000"
+	got := ip.Binary()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestNetwork tests Network of IPv4
 func TestNetwork(t *testing.T) {
 	ip := &IPv4{
