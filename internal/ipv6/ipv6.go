@@ -31,6 +31,11 @@ func (ip *IPv6) Prefix() netip.Prefix {
 	return netip.PrefixFrom(ip.Addr(), ip.pl)
 }
 
+// Hex returns ip as a hexadecimal string
+func (ip *IPv6) Hex() string {
+	return ip.Addr().String()
+}
+
 // Binary returns ip as a binary string
 func (ip *IPv6) Binary() string {
 	return fmt.Sprintf("%08b%08b:%08b%08b:"+
@@ -46,7 +51,7 @@ func (ip *IPv6) Binary() string {
 
 // String returns ip as String
 func (ip *IPv6) String() string {
-	return ip.Addr().String()
+	return ip.Hex()
 }
 
 // SetPrefix sets prefix in ip
