@@ -54,6 +54,15 @@ func (ip *IPv6) Network() string {
 	return ip.Prefix().Masked().Addr().String()
 }
 
+// IID returns the interface identifier of ip as string
+func (ip *IPv6) IID() string {
+	return fmt.Sprintf("%02x:%02x:%02x:%02x"+
+		"%02x:%02x:%02x:%02x",
+		ip.b[8], ip.b[9], ip.b[10], ip.b[11],
+		ip.b[12], ip.b[13], ip.b[14], ip.b[15],
+	)
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
