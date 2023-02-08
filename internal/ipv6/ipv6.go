@@ -49,6 +49,11 @@ func (ip *IPv6) Binary() string {
 	)
 }
 
+// Network returns the network part of ip as string
+func (ip *IPv6) Network() string {
+	return ip.Prefix().Masked().Addr().String()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
