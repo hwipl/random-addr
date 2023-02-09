@@ -54,6 +54,32 @@ func (ip *IPv6) Network() string {
 	return ip.Prefix().Masked().Addr().String()
 }
 
+// Subnet returns the subnet part of ip as string
+func (ip *IPv6) Subnet() string {
+	bits := ip.pl
+	if bits >= 64 {
+		// no subnet bits
+		return ""
+	}
+
+	// create temporary array with only subnet bits set
+	b := [16]byte{}
+	for i := 0; i < len(b); i++ {
+		if bits >= bitsPerByte {
+			// full byte, skip to next byte
+			bits -= bitsPerByte
+			continue
+		}
+
+		// skip remaining prefix bits, set subnet bits
+		ipBits := ip.b[i] & (0xff >> bits)
+		b[i] |= ipBits
+		bits = 0
+	}
+
+	return netip.AddrFrom16(b).String()
+}
+
 // IID returns the interface identifier of ip as string
 func (ip *IPv6) IID() string {
 	return fmt.Sprintf("%02x:%02x:%02x:%02x"+
