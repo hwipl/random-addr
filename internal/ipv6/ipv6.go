@@ -99,6 +99,12 @@ func (ip *IPv6) GlobalUnicast() bool {
 	return ip.Addr().IsGlobalUnicast()
 }
 
+// InterfaceLocalMulticast returns wether ip is an interface local
+// multicast address
+func (ip *IPv6) InterfaceLocalMulticast() bool {
+	return ip.Addr().IsInterfaceLocalMulticast()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
