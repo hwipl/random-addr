@@ -89,6 +89,11 @@ func (ip *IPv6) IID() string {
 	)
 }
 
+// IPv4Mapped returns wether ip is an IPv4-mapped IPv6 address
+func (ip *IPv6) IPv4Mapped() bool {
+	return ip.Addr().Is4In6()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
