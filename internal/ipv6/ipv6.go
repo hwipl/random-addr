@@ -105,6 +105,11 @@ func (ip *IPv6) InterfaceLocalMulticast() bool {
 	return ip.Addr().IsInterfaceLocalMulticast()
 }
 
+// LinkLocalMulticast returns wether ip is a local multicast address
+func (ip *IPv6) LinkLocalMulticast() bool {
+	return ip.Addr().IsLinkLocalMulticast()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
