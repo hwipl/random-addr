@@ -110,6 +110,11 @@ func (ip *IPv6) LinkLocalMulticast() bool {
 	return ip.Addr().IsLinkLocalMulticast()
 }
 
+// LinkLocalUnicast returns wether ip is a local unicast address
+func (ip *IPv6) LinkLocalUnicast() bool {
+	return ip.Addr().IsLinkLocalUnicast()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
