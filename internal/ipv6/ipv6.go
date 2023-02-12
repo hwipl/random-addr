@@ -115,6 +115,11 @@ func (ip *IPv6) LinkLocalUnicast() bool {
 	return ip.Addr().IsLinkLocalUnicast()
 }
 
+// Loopback returns wether ip is a loopback address
+func (ip *IPv6) Loopback() bool {
+	return ip.Addr().IsLoopback()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
