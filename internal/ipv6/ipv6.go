@@ -120,6 +120,11 @@ func (ip *IPv6) Loopback() bool {
 	return ip.Addr().IsLoopback()
 }
 
+// Multicast returns wether ip is a multicast address
+func (ip *IPv6) Multicast() bool {
+	return ip.Addr().IsMulticast()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
