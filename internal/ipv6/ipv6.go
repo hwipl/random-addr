@@ -130,6 +130,11 @@ func (ip *IPv6) Private() bool {
 	return ip.Addr().IsPrivate()
 }
 
+// Unspecified returns wether ip is the unspecified address
+func (ip *IPv6) Unspecified() bool {
+	return ip.Addr().IsUnspecified()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
