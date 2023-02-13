@@ -125,6 +125,11 @@ func (ip *IPv6) Multicast() bool {
 	return ip.Addr().IsMulticast()
 }
 
+// Private returns wether ip is a private address
+func (ip *IPv6) Private() bool {
+	return ip.Addr().IsPrivate()
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
