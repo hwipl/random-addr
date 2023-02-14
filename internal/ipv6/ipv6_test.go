@@ -24,6 +24,19 @@ func TestHex(t *testing.T) {
 	}
 }
 
+// TestBinary tests Binary of IPv6
+func TestBinary(t *testing.T) {
+	ip := &IPv6{}
+	want := "0000000000000000:0000000000000000:" +
+		"0000000000000000:0000000000000000:" +
+		"0000000000000000:0000000000000000:" +
+		"0000000000000000:0000000000000000"
+	got := ip.Binary()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestRandom tests random IPv6 creation
 func TestRandom(t *testing.T) {
 	ip := Random()
