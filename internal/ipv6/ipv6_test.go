@@ -2,6 +2,28 @@ package ipv6
 
 import "testing"
 
+// TestHex tests Hex of IPv6
+func TestHex(t *testing.T) {
+	ip := &IPv6{}
+
+	// test all zeros
+	want := "::"
+	got := ip.Hex()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+
+	// test all ones
+	for i := 0; i < len(ip.b); i++ {
+		ip.b[i] |= 0xff
+	}
+	want = "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+	got = ip.Hex()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestRandom tests random IPv6 creation
 func TestRandom(t *testing.T) {
 	ip := Random()
