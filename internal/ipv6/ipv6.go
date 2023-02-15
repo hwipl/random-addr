@@ -140,6 +140,37 @@ func (ip *IPv6) Unspecified() bool {
 	return ip.Addr().IsUnspecified()
 }
 
+// Type return the type of ip
+func (ip *IPv6) Type() string {
+	if ip.Loopback() {
+		return "loopback"
+	}
+	if ip.Unspecified() {
+		return "unspecified"
+	}
+	if ip.GlobalUnicast() {
+		return "global unicast"
+	}
+	if ip.LinkLocalMulticast() {
+		return "link-local multicast"
+	}
+	if ip.LinkLocalUnicast() {
+		return "link-local unicast"
+	}
+	if ip.IPv4Mapped() {
+		return "IPv4-mapped"
+	}
+	pp := "public"
+	if ip.Private() {
+		pp = "private"
+	}
+	um := "unicast"
+	if ip.Multicast() {
+		um = "multicast"
+	}
+	return fmt.Sprintf("%s %s", pp, um)
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
