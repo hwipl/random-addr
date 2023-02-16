@@ -37,6 +37,17 @@ func TestBinary(t *testing.T) {
 	}
 }
 
+// TestSetPrefix tests SetPrefix of IPv6
+func TestSetPrefix(t *testing.T) {
+	ip := Random()
+	ip.SetPrefix("fe80::/64")
+	want := "fe80::"
+	got := ip.Network()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestRandom tests random IPv6 creation
 func TestRandom(t *testing.T) {
 	ip := Random()
