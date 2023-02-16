@@ -48,6 +48,17 @@ func TestSetPrefix(t *testing.T) {
 	}
 }
 
+// TestSetPrefixLength tests SetPrefixLength of IPv6
+func TestSetPrefixLength(t *testing.T) {
+	ip := Parse("fe80::1")
+	ip.SetPrefixLength(64)
+	want := "fe80::"
+	got := ip.Network()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestRandom tests random IPv6 creation
 func TestRandom(t *testing.T) {
 	ip := Random()
