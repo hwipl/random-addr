@@ -64,7 +64,7 @@ func (ip *IPv6) Subnet() string {
 
 	// create temporary array with only subnet bits set
 	b := [16]byte{}
-	for i := 0; i < len(b); i++ {
+	for i := 0; i < 8; i++ {
 		if bits >= bitsPerByte {
 			// full byte, skip to next byte
 			bits -= bitsPerByte
