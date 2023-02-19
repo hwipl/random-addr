@@ -37,6 +37,19 @@ func TestBinary(t *testing.T) {
 	}
 }
 
+// TestIID tests IID of IPv6
+func TestIID(t *testing.T) {
+	ip := &IPv6{
+		b: [16]byte{1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2},
+	}
+	ip.SetPrefixLength(64)
+	want := "0202:0202:0202:0202"
+	got := ip.IID()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestSetPrefix tests SetPrefix of IPv6
 func TestSetPrefix(t *testing.T) {
 	ip := Random()
