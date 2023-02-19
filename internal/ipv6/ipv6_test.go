@@ -37,6 +37,19 @@ func TestBinary(t *testing.T) {
 	}
 }
 
+// TestNetwork tests Network of IPv6
+func TestNetwork(t *testing.T) {
+	ip := &IPv6{
+		b: [16]byte{1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2},
+	}
+	ip.SetPrefixLength(64)
+	want := "101:101:101:101::"
+	got := ip.Network()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestIID tests IID of IPv6
 func TestIID(t *testing.T) {
 	ip := &IPv6{
