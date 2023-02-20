@@ -50,6 +50,19 @@ func TestNetwork(t *testing.T) {
 	}
 }
 
+// Subnet tests Subnet of IPv6
+func TestSubnet(t *testing.T) {
+	ip := &IPv6{
+		b: [16]byte{1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2},
+	}
+	ip.SetPrefixLength(52)
+	want := "0:0:0:101::"
+	got := ip.Subnet()
+	if got != want {
+		t.Errorf("got %s, want %s", got, want)
+	}
+}
+
 // TestIID tests IID of IPv6
 func TestIID(t *testing.T) {
 	ip := &IPv6{
