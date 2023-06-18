@@ -159,6 +159,23 @@ func aaBracketTop(l int) string {
 	return " " + strings.Repeat("_", left) + "/\\" + strings.Repeat("_", right) + " "
 }
 
+// aaBracketBottom returns the bottom part of an ascii art bracket with length l
+func aaBracketBottom(l int) string {
+	if l < 0 {
+		return ""
+	}
+
+	switch l {
+	case 0:
+		return ""
+	case 1:
+		return "|"
+	case 2:
+		return "||"
+	}
+	return "|" + strings.Repeat(" ", l-2) + "|"
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
