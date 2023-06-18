@@ -136,6 +136,29 @@ func (ip *IPv4) Type() string {
 	return fmt.Sprintf("%s %s", pp, ubm)
 }
 
+// aaBracketTop returns the top part of an ascii art bracket with length l
+func aaBracketTop(l int) string {
+	if l < 0 {
+		return ""
+	}
+
+	switch l {
+	case 0:
+		return ""
+	case 1:
+		return "|"
+	case 2:
+		return "|\\"
+	case 3:
+		return "|\\ "
+	case 4:
+		return " /\\ "
+	}
+	left := (l - 4) / 2
+	right := l - 4 - left
+	return " " + strings.Repeat("_", left) + "/\\" + strings.Repeat("_", right) + " "
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
