@@ -176,6 +176,35 @@ func aaBracketBottom(l int) string {
 	return "|" + strings.Repeat(" ", l-2) + "|"
 }
 
+// ExplainBin returns an explanation of the IP and its structure as string
+func (ip *IPv4) ExplainBin() string {
+	// consider up to 3 dots in 32 bit address,
+	// calculate prefix and host length for ascii art bracket creation
+	pl := ip.pl + (ip.pl / bitsPerByte)
+	hl := 35 - pl
+	skip := ""
+	if ip.pl != 0 && ip.pl%bitsPerByte == 0 {
+		// prefix ends exacly at a dot,
+		// omit this dot in ascii art bracket for prefix,
+		// set skip to start ascii art bracket for host after this dot
+		pl -= 1
+		skip = " "
+	}
+
+	return fmt.Sprintf(`Network: %s    Host: %s
+      %s%s%s
+      %s%s%s
+Bin:  %s
+Type: %s
+`,
+		ip.Network(), ip.Host(),
+		aaBracketTop(pl), skip, aaBracketTop(hl),
+		aaBracketBottom(pl), skip, aaBracketBottom(hl),
+		ip.Binary(),
+		ip.Type(),
+	)
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
