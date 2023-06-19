@@ -171,6 +171,76 @@ func (ip *IPv6) Type() string {
 	return fmt.Sprintf("%s %s", pp, um)
 }
 
+// aaBracketTop returns the top part of an ascii art bracket with length l
+func aaBracketTop(l int) string {
+	if l < 0 {
+		return ""
+	}
+
+	switch l {
+	case 0:
+		return ""
+	case 1:
+		return "|"
+	case 2:
+		return "|\\"
+	case 3:
+		return "|\\ "
+	case 4:
+		return " /\\ "
+	}
+	left := (l - 4) / 2
+	right := l - 4 - left
+	return " " + strings.Repeat("_", left) + "/\\" + strings.Repeat("_", right) + " "
+}
+
+// aaBracketBottom returns the bottom part of an ascii art bracket with length l
+func aaBracketBottom(l int) string {
+	if l < 0 {
+		return ""
+	}
+
+	switch l {
+	case 0:
+		return ""
+	case 1:
+		return "|"
+	case 2:
+		return "||"
+	}
+	return "|" + strings.Repeat(" ", l-2) + "|"
+}
+
+// ExplainBin returns an explanation of the IP and its structure as string
+func (ip *IPv6) ExplainBin() string {
+	// consider up to 3 dots in 32 bit address,
+	// calculate prefix and host length for ascii art bracket creation
+	pl := ip.pl + (ip.pl / (2 * bitsPerByte))
+	sl := 67 - pl
+	il := 67
+	skip := ""
+	if ip.pl != 0 && ip.pl%(2*bitsPerByte) == 0 {
+		// prefix ends exacly at a dot,
+		// omit this dot in ascii art bracket for prefix,
+		// set skip to start ascii art bracket for host after this dot
+		pl -= 1
+		skip = " "
+	}
+
+	return fmt.Sprintf(`Network: %s    Subnet: %s    IID: %s
+      %s%s%s %s
+      %s%s%s %s
+Bin:  %s
+Type: %s
+`,
+		ip.Network(), ip.Subnet(), ip.IID(),
+		aaBracketTop(pl), skip, aaBracketTop(sl), aaBracketTop(il),
+		aaBracketBottom(pl), skip, aaBracketBottom(sl), aaBracketBottom(il),
+		ip.Binary(),
+		ip.Type(),
+	)
+}
+
 // String returns ip as String
 func (ip *IPv6) String() string {
 	return ip.Hex()
