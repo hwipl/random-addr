@@ -209,6 +209,29 @@ Type: %s
 	)
 }
 
+// getBinLengthDec returns a decimal representation of ip that has the same
+// length as the binary representation, decimal numbers are padded with spaces
+// to align them with the binary representation
+func (ip *IPv4) getBinLengthDec() string {
+	s := [4]string{}
+	for i := 0; i < len(ip.b); i++ {
+		l := 1
+		if ip.b[i] > 9 {
+			l += 1
+		}
+		if ip.b[i] > 99 {
+			l += 1
+		}
+		left := (8 - l) / 2
+		right := 8 - l - left
+		s[i] = fmt.Sprintf("%s%d%s",
+			strings.Repeat(" ", left),
+			ip.b[i],
+			strings.Repeat(" ", right))
+	}
+	return fmt.Sprintf("%s.%s.%s.%s", s[0], s[1], s[2], s[3])
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
