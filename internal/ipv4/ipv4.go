@@ -176,13 +176,12 @@ func aaBracketBottom(l int) string {
 	return "|" + strings.Repeat(" ", l-2) + "|"
 }
 
-// ExplainBin returns an explanation of the IP and its structure as string
-func (ip *IPv4) ExplainBin() string {
+// getPLHLSkip returns prefix length, host length and skip
+func (ip *IPv4) getPLHLSkip() (pl, hl int, skip string) {
 	// consider up to 3 dots in 32 bit address,
 	// calculate prefix and host length for ascii art bracket creation
-	pl := ip.pl + (ip.pl / bitsPerByte)
-	hl := 35 - pl
-	skip := ""
+	pl = ip.pl + (ip.pl / bitsPerByte)
+	hl = 35 - pl
 	if ip.pl != 0 && ip.pl%bitsPerByte == 0 {
 		// prefix ends exacly at a dot,
 		// omit this dot in ascii art bracket for prefix,
@@ -190,7 +189,12 @@ func (ip *IPv4) ExplainBin() string {
 		pl -= 1
 		skip = " "
 	}
+	return
+}
 
+// ExplainBin returns an explanation of the IP and its structure as string
+func (ip *IPv4) ExplainBin() string {
+	pl, hl, skip := ip.getPLHLSkip()
 	return fmt.Sprintf(`Network: %s    Host: %s
       %s%s%s
       %s%s%s
