@@ -232,6 +232,25 @@ func (ip *IPv4) getBinLengthDec() string {
 	return fmt.Sprintf("%s.%s.%s.%s", s[0], s[1], s[2], s[3])
 }
 
+// ExplainDecimal returns an explanation of the IP and its structure as string
+func (ip *IPv4) ExplainDecimal() string {
+	pl, hl, skip := ip.getPLHLSkip()
+	return fmt.Sprintf(`Network: %s    Host: %s
+      %s%s%s
+      %s%s%s
+Bin:  %s
+Dec:  %s
+Type: %s
+`,
+		ip.Network(), ip.Host(),
+		aaBracketTop(pl), skip, aaBracketTop(hl),
+		aaBracketBottom(pl), skip, aaBracketBottom(hl),
+		ip.Binary(),
+		ip.getBinLengthDec(),
+		ip.Type(),
+	)
+}
+
 // String returns ip as String
 func (ip *IPv4) String() string {
 	return ip.Decimal()
